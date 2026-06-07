@@ -210,13 +210,7 @@ function renderOffers(){
     </div>`).join('');
 }
 
-function renderDelivery(){
-  document.getElementById('delivery-grid').innerHTML = DELIVERY.map(d=>`
-    <div class="d-card${selectedCity===d.city?' selected':''}" onclick="selectCity('${d.city}')">
-      <div class="d-city">${d.city}</div>
-      <div class="d-info">توصيل ${d.fee} جنيه · أدنى ${d.min} جنيه</div>
-    </div>`).join('');
-}
+
 
 function changeQty(id,delta){
   qty[id] = Math.max(0,(qty[id]||0)+delta);
@@ -315,6 +309,6 @@ const total = lines.reduce((s,l)=>s+l.total,0);
 renderTabs();
 renderMenu();
 renderOffers();
-renderDelivery();
+
 updateSummary();
 </script>
