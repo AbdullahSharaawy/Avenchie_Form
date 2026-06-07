@@ -269,7 +269,7 @@ async function submitOrder(){
   const lines   = getOrderLines();
 
   if(!name||!phone||!address){alert('من فضلك أكمل بياناتك (الاسم، الهاتف، العنوان)');return;}
-  if(!selectedCity){alert('من فضلك اختر منطقة التوصيل');return;}
+
   if(lines.length===0){alert('الطلب فارغ!');return;}
 
   const d   = DELIVERY.find(x=>x.city===selectedCity);
