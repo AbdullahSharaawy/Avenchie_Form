@@ -268,15 +268,11 @@ async function submitOrder(){
   const notes   = document.getElementById('cnotes').value.trim();
   const lines   = getOrderLines();
 
-  if(!name||!phone||!address){alert('من فضلك أكمل بياناتك (الاسم، الهاتف، العنوان)');return;}
+ if(!name||!phone||!address){alert('من فضلك أكمل بياناتك (الاسم، الهاتف، العنوان)');return;}
+if(lines.length===0){alert('الطلب فارغ!');return;}
 
-  if(lines.length===0){alert('الطلب فارغ!');return;}
-
-  const d   = DELIVERY.find(x=>x.city===selectedCity);
-  const sub = lines.reduce((s,l)=>s+l.total,0);
-  if(sub < d.min){alert(`الحد الأدنى للطلب في ${selectedCity} هو ${d.min} جنيه`);return;}
-
-  const total = sub + d.fee;
+const sub = lines.reduce((s,l)=>s+l.total,0);
+const total = sub;
 
   const btn = document.getElementById('submit-btn');
   btn.disabled = true;
