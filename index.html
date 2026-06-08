@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -69,7 +68,8 @@ body{direction:rtl;font-family:var(--font-sans)}
 .sum-row{display:flex;justify-content:space-between;font-size:13px;color:var(--color-text-secondary);padding:3px 0}
 .sum-total{display:flex;justify-content:space-between;font-size:16px;font-weight:500;color:var(--color-text-primary);border-top:0.5px solid var(--color-border-tertiary);margin-top:8px;padding-top:8px}
 .sum-total span:last-child{color:#993C1D}
-.input-row{margin-bottom:10px}
+.input-row{margin-bottom:10px; }
+.input_style{padding: 10px; }
 .input-row label{font-size:13px;color:var(--color-text-secondary);display:block;margin-bottom:4px}
 input[type=text],input[type=tel],textarea,select{width:100%}
 textarea{height:70px;resize:vertical}
@@ -112,10 +112,10 @@ textarea{height:70px;resize:vertical}
 <div class="section">
   <div class="section-title"><i class="ti ti-user" aria-hidden="true"></i> بياناتك</div>
   <div class="card">
-    <div class="input-row"><label>الاسم</label><input type="text" id="cname" placeholder="اسمك الكامل"/></div>
-    <div class="input-row"><label>رقم الهاتف</label><input type="tel" id="cphone" placeholder="01xxxxxxxxx"/></div>
-    <div class="input-row"><label>العنوان بالتفصيل</label><input type="text" id="caddress" placeholder="الشارع، رقم المبنى..."/></div>
-    <div class="input-row"><label>ملاحظات (اختياري)</label><textarea id="cnotes" placeholder="مثال: بدون مخلل، حار زيادة..."></textarea></div>
+    <div class="input-row"><label>الاسم</label><input class="input_style" type="text" id="cname" placeholder="اسمك الكامل"/></div>
+    <div class="input-row"><label>رقم الهاتف</label><input class="input_style" type="tel" id="cphone" placeholder="01xxxxxxxxx"/></div>
+    <div class="input-row"><label>العنوان بالتفصيل</label><input class="input_style" type="text" id="caddress" placeholder="الشارع، رقم المبنى..."/></div>
+    <div class="input-row"><label>ملاحظات (اختياري)</label><textarea class="input_style" id="cnotes" placeholder="مثال: بدون مخلل، حار زيادة..."></textarea></div>
   </div>
 </div>
 
