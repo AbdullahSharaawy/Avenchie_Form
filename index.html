@@ -252,7 +252,11 @@ function updateSummary(){
     (selectedCity?`<div class="sum-row"><span>توصيل (${selectedCity})</span><span>${deliveryFee} جنيه</span></div>`:'');
   document.getElementById('sum-total-val').textContent = total+' جنيه';
 }
+function generateOrderId(){
+  const orderId = Math.random().toString(36).substring(2, 10).toUpperCase();
 
+  return orderId;
+}
 const N8N_WEBHOOK_URL = 'https://n8n-nyez.avenchie.com/webhook-test/shawarma-order';
 
 async function submitOrder(){
@@ -267,7 +271,7 @@ if(lines.length===0){alert('الطلب فارغ!');return;}
 
 const total = lines.reduce((s,l)=>s+l.total,0);
 
-
+ const orderId = generateOrderId();
   const btn = document.getElementById('submit-btn');
   btn.disabled = true;
   btn.innerHTML = '<i class="fa fa-spinner fa-spin"></i> جاري الإرسال...';
@@ -277,7 +281,8 @@ const total = lines.reduce((s,l)=>s+l.total,0);
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        name,
+       orderId,
+          name,
         phone,
         address,
        
