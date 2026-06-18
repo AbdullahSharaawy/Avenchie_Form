@@ -300,7 +300,7 @@ const total = lines.reduce((s,l)=>s+l.total,0);
     btn.innerHTML = '<i class="ti ti-shopping-cart"></i> تأكيد الطلب';
   }
 }
-const MENU_WEBHOOK_URL ='https://n8n-nyez.avenchie.com/webhook-test/shawarma-menu';    
+const MENU_WEBHOOK_URL ='https://n8n-nyez.avenchie.com/webhook/shawarma-menu';    
 async function loadMenu() {
   try {
     const res  = await fetch(MENU_WEBHOOK_URL);
