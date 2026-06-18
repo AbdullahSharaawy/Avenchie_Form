@@ -150,6 +150,7 @@ let selectedCity = null;
 function renderTabs(){
   const el = document.getElementById('tabs');
   const cats = [...new Set(MENU.map(i=>i.cat))];
+    console.log(cats);
   el.innerHTML = cats.map(c=>`<button class="tab${c===activeTab?' active':''}" onclick="setTab('${c}')">${c}</button>`).join('');
 }
 
