@@ -145,10 +145,11 @@ const qty = {};
 let activeTab = 'شاورما';
 let selectedCity = null;
 
-const cats = [...new Set(MENU.map(i=>i.cat))];
+
 
 function renderTabs(){
   const el = document.getElementById('tabs');
+  const cats = [...new Set(MENU.map(i=>i.cat))];
   el.innerHTML = cats.map(c=>`<button class="tab${c===activeTab?' active':''}" onclick="setTab('${c}')">${c}</button>`).join('');
 }
 
