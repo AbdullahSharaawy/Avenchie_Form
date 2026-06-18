@@ -131,27 +131,9 @@ textarea{height:70px;resize:vertical}
 </div>
 
 <script>
-const MENU = [
-  {id:'ITEM-001',name:'سندوتش شاورما فراخ صغير',desc:'شاورما فراخ متبلة مع ثومية ومخلل',cat:'شاورما',price:55},
-  {id:'ITEM-002',name:'سندوتش شاورما فراخ كبير',desc:'شاورما فراخ بكمية مضاعفة مع الثومية',cat:'شاورما',price:75},
-  {id:'ITEM-003',name:'سندوتش شاورما لحمة صغير',desc:'شرائح لحم متبلة مع طحينة ومخلل',cat:'شاورما',price:70},
-  {id:'ITEM-004',name:'سندوتش شاورما لحمة كبير',desc:'شاورما لحمة بكمية كبيرة',cat:'شاورما',price:95},
-  {id:'ITEM-005',name:'وجبة شاورما فراخ',desc:'شاورما فراخ + بطاطس + مشروب',cat:'وجبات',price:140},
-  {id:'ITEM-006',name:'وجبة شاورما لحمة',desc:'شاورما لحمة + بطاطس + مشروب',cat:'وجبات',price:170},
-  {id:'ITEM-007',name:'أرز بالشاورما',desc:'أرز شرقي مع شاورما فراخ وصوص الثومية',cat:'وجبات',price:150},
-  {id:'ITEM-008',name:'بطاطس شاورما',desc:'بطاطس مغطاة بشاورما فراخ وصوصات',cat:'مقبلات',price:95},
-  {id:'ITEM-009',name:'بطاطس مقلية',desc:'بطاطس مقرمشة',cat:'مقبلات',price:35},
-  {id:'ITEM-010',name:'بيبسي',desc:'مشروب غازي',cat:'مشروبات',price:20},
-  {id:'ITEM-011',name:'سفن أب',desc:'مشروب غازي',cat:'مشروبات',price:20},
-  {id:'ITEM-012',name:'عصير مانجو',desc:'عصير مانجو طازج',cat:'مشروبات',price:45},
-];
 
-const OFFERS = [
-  {id:'OFFER-001',name:'عرض الطالب',desc:'سندوتش شاورما فراخ صغير + بيبسي',price:65},
-  {id:'OFFER-002',name:'عرض العائلة',desc:'4 سندوتش شاورما فراخ كبير + 4 مشروبات',price:320},
-  {id:'OFFER-003',name:'كومبو الحريف',desc:'وجبة شاورما فراخ + بطاطس شاورما',price:210},
-];
-
+let MENU = [];
+let OFFERS = [];
 const DELIVERY = [
   {city:'مدينة نصر',fee:20,min:100},
   {city:'مصر الجديدة',fee:25,min:100},
@@ -316,10 +298,26 @@ const total = lines.reduce((s,l)=>s+l.total,0);
     btn.innerHTML = '<i class="ti ti-shopping-cart"></i> تأكيد الطلب';
   }
 }
-
-renderTabs();
-renderMenu();
-renderOffers();
-
-updateSummary();
+const MENU_WEBHOOK_URL ='https://n8n-nyez.avenchie.com/webhook-test/shawarma-menu';    
+async function loadMenu() {
+  try {
+    const res  = await fetch(MENU_WEBHOOK_URL);
+    const data = await res.json();
+    MENU   = data.menu;
+    OFFERS = data.offers.map(o => ({...o, price: Number(o.price)}));
+    MENU   = MENU.map(i => ({...i, price: Number(i.price)}));
+  } catch(e) {
+    console.error('فشل تحميل القائمة', e);
+    // fallback: hardcode a minimal menu here if needed
+  } finally {
+    renderTabs();
+    renderMenu();
+    renderOffers();
+    updateSummary();
+  }
+}
+    // At the very top of <script>, before loadMenu():
+document.getElementById('menu-list').innerHTML = 
+  '<div class="empty-msg"><i class="fa fa-spinner fa-spin"></i> جاري تحميل القائمة...</div>';
+loadMenu();
 </script>
